@@ -20,6 +20,9 @@ mongoose.connect(`${process.env.MONGODB_URL}`,{
     useFindAndModify:false
 });
 
+app.get('/',(req,res)=>{
+    res.send();
+})
 
 app.post('/api/formsubmit',expressAsyncHandler(async(req,res)=>{
     const result=await form({name:req.body.name,email:req.body.email,password:req.body.password,confirmpassword:req.body.confirmpassword});
