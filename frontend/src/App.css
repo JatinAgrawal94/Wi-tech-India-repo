@@ -1,0 +1,38 @@
+form{
+  padding:4px;
+  background-color:gray;
+}
+
+h1{
+  font-size: 25px;
+}
+label{
+  display:block;
+  text-align: left;
+  font-size:20px;
+}
+
+input{
+  width: 100%;
+  border: 2px solid black;
+  border-radius: 5%;
+  height: 15%;
+}
+
+.form-control{
+  padding:5px;
+}
+
+button{
+  padding:5px;
+  background-color: blue;
+  border:none;
+  font-size: 20px;
+  border-radius: 10%;
+  margin-left:50%;
+  margin-right:50%;
+}
+
+button:hover{
+  background-color:#6666FF;
+}
