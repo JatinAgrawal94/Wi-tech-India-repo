@@ -9,9 +9,9 @@ function App() {
   const [email,changeEmail]=useState();
   const [password,changePassword]=useState();
   const [confirmpassword,changeconfirmPassword]=useState();
-
   
   const formSubmitHandler=()=>{
+    
     if(password !== confirmpassword){
       alert("Passwords donot Match !");
     }else{
@@ -24,7 +24,6 @@ function App() {
 
   return (
     <div className="App">
-      
       <form>  
         <h1>Registration Form</h1>
         <div className="form-control">

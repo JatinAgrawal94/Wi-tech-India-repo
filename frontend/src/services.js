@@ -2,11 +2,9 @@ import Axios from 'axios';
 import dotenv from 'dotenv';
 dotenv.config();
 
-
 export const SubmitForm=async(name,email,password,confirmpassword)=>{
     try{
         const {data}=await Axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/formsubmit`,{name,email,password,confirmpassword});
-        
         console.log(data);
     }catch(error){
         console.log(error);
