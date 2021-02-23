@@ -13,7 +13,6 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}));
 
 // mongodb://localhost/witech
-console.log(process.env.MONGODB_URL);
 mongoose.connect(`${process.env.MONGODB_URL}`,{
     useNewUrlParser:true,
     useUnifiedTopology:true,
