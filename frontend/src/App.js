@@ -9,7 +9,7 @@ function App() {
   const [email,changeEmail]=useState('');
   const [password,changePassword]=useState("");
   const [confirmpassword,changeconfirmPassword]=useState("");
-
+  const [message,changemessage]=useState();
   const formSubmitHandler=(e)=>{    
     e.preventDefault();
 
@@ -19,11 +19,14 @@ function App() {
       Axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/formsubmit`,{name,email,password,confirmpassword})
       .then((response)=>{
         console.log(response);
+        changemessage(response.data);
       })
       .catch((reject)=>{
         console.log(reject);
+        changemessage(reject.data);
       })
     }
+
   }
   return (
     <div className="App">
@@ -31,12 +34,12 @@ function App() {
         <h1>Registration Form</h1>
         <div className="form-control">
           <label htmlFor="name">Name</label>
-          <input type="text" value={name} onChange={(e)=>changeName(e.target.value)} required/>
+          <input type="text"  onChange={(e)=>changeName(e.target.value)} value={name} required/>
         </div>
 
         <div className="form-control">
         <label htmlFor="email">Email</label>
-        <input type="text" onChange={(e)=>changeEmail(e.target.value)} value={email} required />
+        <input type="text" onChange={(e)=>changeEmail(e.target.value)}value={email} required />
         </div>
 
         <div className="form-control">
@@ -50,6 +53,7 @@ function App() {
         </div>
         <button type="submit">Submit</button>
       </form>
+        <p>{message}</p>
     </div>
   );
 }
