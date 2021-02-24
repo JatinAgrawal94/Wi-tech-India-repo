@@ -1,51 +1,54 @@
 import './App.css';
 import React,{useState} from 'react'
-import {SubmitForm} from './services';
+import Axios from 'axios';
 import dotenv from 'dotenv';
 dotenv.config();
 
 function App() {
-  const [name,changeName]=useState();
-  const [email,changeEmail]=useState();
-  const [password,changePassword]=useState();
-  const [confirmpassword,changeconfirmPassword]=useState();
-  
-  const formSubmitHandler=()=>{
-    
+  const [name,changeName]=useState("");
+  const [email,changeEmail]=useState('');
+  const [password,changePassword]=useState("");
+  const [confirmpassword,changeconfirmPassword]=useState("");
+
+  const formSubmitHandler=(e)=>{    
+    e.preventDefault();
+
     if(password !== confirmpassword){
       alert("Passwords donot Match !");
     }else{
-      SubmitForm(name,email,password,confirmpassword)
-      .then(data=>console.log(data))
-      .catch(err=>console.log(err));
+      Axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/formsubmit`,{name,email,password,confirmpassword})
+      .then((response)=>{
+        console.log(response);
+      })
+      .catch((reject)=>{
+        console.log(reject);
+      })
     }
-    
   }
-
   return (
     <div className="App">
-      <form>  
+      <form onSubmit={formSubmitHandler}>  
         <h1>Registration Form</h1>
         <div className="form-control">
           <label htmlFor="name">Name</label>
-          <input type="text" onChange={(e)=>changeName(e.target.value)} required/>
+          <input type="text" value={name} onChange={(e)=>changeName(e.target.value)} required/>
         </div>
 
         <div className="form-control">
         <label htmlFor="email">Email</label>
-        <input type="text" onChange={(e)=>changeEmail(e.target.value)} required />
+        <input type="text" onChange={(e)=>changeEmail(e.target.value)} value={email} required />
         </div>
 
         <div className="form-control">
         <label htmlFor="password">Password</label>
-        <input type="password" onChange={(e)=>changePassword(e.target.value)} required/>
+        <input type="password" onChange={(e)=>changePassword(e.target.value)} value={password} required/>
         </div>
 
         <div className="form-control">
         <label htmlFor="confirmpassword">Confirm Password</label>
-        <input type="password" onChange={(e)=>changeconfirmPassword(e.target.value)} required />
+        <input type="password" onChange={(e)=>changeconfirmPassword(e.target.value)} value={confirmpassword} required />
         </div>
-        <button onClick={formSubmitHandler} type="buttton">Submit</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
